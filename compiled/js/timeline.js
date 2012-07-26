@@ -6418,10 +6418,22 @@ if(typeof VMM != 'undefined' && typeof VMM.Timeline == 'undefined') {
 			_dates = [];
 			VMM.fireEvent(global, config.events.messege, "Building Dates");
 			updateSize();
+
 			
 			for(var i = 0; i < data.date.length; i++) {
+
+                          var show = false;
+                          // Only show dates in specified categories.
+                          if (timeline_categories && data.date[i].category) {
+                            for (var j = 0; j < data.date[i].category.length; j++) {
+                              if (timeline_categories[data.date[i].category[j]]) {
+                                show = true;
+                                break;
+                              } 
+                            }
+                          }
 				
-				if (data.date[i].startDate != null && data.date[i].startDate != "") {
+				if (show && data.date[i].startDate != null && data.date[i].startDate != "") {
 					
 					var _date = {};
 					
